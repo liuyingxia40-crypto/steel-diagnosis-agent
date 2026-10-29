@@ -1,0 +1,9 @@
+﻿# 官方原件不参与自动索引
+data/official/
+
+# 本地密钥不参与自动索引
+.env
+backend/.env
+
+# 本地解析结果不参与自动索引
+data/processed/

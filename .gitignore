@@ -1,0 +1,82 @@
+# ========== 官方资料与本地数据（默认不上传 GitHub）==========
+# 官方原始 Word / 知识库原件
+data/official/
+# 官方开发集 Excel 等数据集
+data/official_dataset/
+# 本地解析结果、知识图谱加工产物
+data/processed/
+# 运行时数据库、日志、联调临时目录
+data/runtime/
+
+# 本地备份与历史快照（体积大，且可能含本地状态）
+backup/
+
+# ========== 依赖与构建产物 ==========
+node_modules/
+frontend/node_modules/
+backend/.venv/
+.venv/
+venv/
+dist/
+frontend/dist/
+dist-ssr/
+build/
+*.egg-info/
+.eggs/
+
+# Python 缓存
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.cache/
+
+# ========== 环境变量与本地密钥 ==========
+.env
+.env.*
+!.env.example
+backend/.env
+!backend/.env.example
+*.local
+*.pem
+*.key
+credentials.json
+credentials.*.json
+secrets.json
+secrets.*.json
+**/api-keys.json
+**/api-keys.*.json
+
+# ========== 数据库、日志与临时文件 ==========
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# ========== 系统与编辑器 ==========
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript / Vite 本地缓存
+*.tsbuildinfo
+.vite/
