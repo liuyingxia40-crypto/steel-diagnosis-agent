@@ -1,4 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react"
+import { DEMO_LINE } from "../overview/demoData"
+import { equipmentProfile } from "../overview/equipmentProfile"
+import { equipmentOf } from "../overview/model"
+import { useRoute } from "../routing"
 import type { ApiErrorResponse, DatasetAnalysis, DatasetDevice, DatasetRecord, DatasetRecords, DatasetSearchResult, DatasetSummary, StoredMonitorEvent } from "../types/api"
 import { CockpitCharts } from "../monitoring/CockpitCharts"
 import {
@@ -135,8 +139,24 @@ async function readJson(url: string, signal: AbortSignal, init?: RequestInit): P
   return body
 }
 
+function focusEquipmentLabel(equipmentId: string): string {
+  const node = equipmentOf(DEMO_LINE, equipmentId)
+  const name = equipmentProfile(equipmentId)?.name ?? node?.name ?? equipmentId
+  return node?.code ? `${name}（${node.code}）` : name
+}
+
+function matchDatasetDevice(devices: DatasetDevice[], equipmentId: string): DatasetDevice | undefined {
+  const node = equipmentOf(DEMO_LINE, equipmentId)
+  const profile = equipmentProfile(equipmentId)
+  const keys = new Set([equipmentId, node?.id, node?.code, node?.name, profile?.name].filter((item): item is string => Boolean(item)))
+  return devices.find((item) => keys.has(item.device_id) || (item.device_name ? keys.has(item.device_name) : false))
+}
+
 export function EquipmentMonitoringPage() {
+  const { route } = useRoute()
+  const focusEquipmentId = route.page === "monitor" ? route.equipmentId : undefined
   const [summary, setSummary] = useState<DatasetSummary | null>(null)
+  const [locateNote, setLocateNote] = useState("")
   const [devices, setDevices] = useState<DatasetDevice[]>([])
   const [deviceCount, setDeviceCount] = useState<number | null>(null)
   const [loadError, setLoadError] = useState("")
@@ -157,6 +177,7 @@ export function EquipmentMonitoringPage() {
   const [querying, setQuerying] = useState(false)
   const [records, setRecords] = useState<DatasetRecords | null>(null)
   const searchRequest = useRef<AbortController | null>(null)
+  const appliedFocus = useRef("")
   const [vibrationGroup, setVibrationGroup] = useState<VibrationGroupId>("speed")
   const [focusEventId, setFocusEventId] = useState<number | null>(null)
   const [techOpen, setTechOpen] = useState(false)
@@ -403,7 +424,8 @@ export function EquipmentMonitoringPage() {
         const picked = pickRestoredTask(tasks)
         setAutoError("")
         setAutoTask(picked)
-        if (picked && !deviceIdRef.current) {
+        const requestedEquipment = new URLSearchParams(window.location.search).get("equipmentId")
+        if (picked && !deviceIdRef.current && !requestedEquipment) {
           setDeviceId(picked.device_id)
         }
         if (picked) {
@@ -583,7 +605,8 @@ export function EquipmentMonitoringPage() {
   }, [])
 
   useEffect(() => {
-    if (loadingCatalog || devices.length === 0 || searchResult) {
+    const requestedEquipment = new URLSearchParams(window.location.search).get("equipmentId")
+    if (requestedEquipment || focusEquipmentId || loadingCatalog || devices.length === 0 || searchResult) {
       return
     }
     const preferred = devices.find((item) => item.device_id === "MM-01") || devices[0]
@@ -594,7 +617,37 @@ export function EquipmentMonitoringPage() {
     void runHistorySearch(1, { deviceId: preferred?.device_id || deviceId, q: "" })
     // 仅在目录首次加载后给历史查询一个默认结果，避免空白列表。
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadingCatalog, devices.length])
+  }, [loadingCatalog, devices.length, focusEquipmentId])
+
+  useEffect(() => {
+    if (!focusEquipmentId) {
+      appliedFocus.current = ""
+      setLocateNote("")
+      return
+    }
+    if (loadingCatalog || devices.length === 0) {
+      setLocateNote(loadingCatalog ? `正在监测数据中查找 ${focusEquipmentLabel(focusEquipmentId)}。` : `监测数据没有加载完成，无法定位 ${focusEquipmentLabel(focusEquipmentId)}。`)
+      return
+    }
+    if (appliedFocus.current === focusEquipmentId) {
+      return
+    }
+    appliedFocus.current = focusEquipmentId
+    const match = matchDatasetDevice(devices, focusEquipmentId)
+    if (!match) {
+      setLocateNote(`监测数据集中没有 ${focusEquipmentLabel(focusEquipmentId)}。没有改选其他设备。`)
+      setCategory("")
+      setDeviceId("")
+      setSearchResult(null)
+      return
+    }
+    setLocateNote("")
+    setCategory(match.equipment_category)
+    setDeviceId(match.device_id)
+    void runHistorySearch(1, { deviceId: match.device_id, q: "" })
+    // 只在地址指定设备时定位，找不到就不回落到默认设备。
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focusEquipmentId, loadingCatalog, devices])
 
   useEffect(() => {
     if (!deviceId) {
@@ -943,6 +996,11 @@ export function EquipmentMonitoringPage() {
           </div>
           <p className="cockpit-source">当前没有连接实时传感器。离开本页不会停止已经启动的后端任务。</p>
         </header>
+        {locateNote ? (
+          <p className="status" role="status">
+            {locateNote}
+          </p>
+        ) : null}
 
         {loadingCatalog && <p className="status">正在读取官方数据集。</p>}
         {loadError && (

@@ -283,7 +283,7 @@ check(
     !app.includes("<HomePage />") &&
     app.includes("知识图谱") &&
     app.includes("设备运行监测") &&
-    app.includes("<VibrationAnalysisPage />") &&
+    !app.includes("VibrationAnalysisPage") &&
     app.includes("<EquipmentMonitoringPage />"),
 )
 

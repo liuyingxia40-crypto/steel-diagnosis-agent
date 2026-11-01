@@ -281,19 +281,19 @@ export function KnowledgeGraphPage() {
             ))}
             <span>
               <svg className="legend-stroke" viewBox="0 0 28 8" aria-hidden="true">
-                <line x1="1" y1="4" x2="27" y2="4" stroke="#d5e6f2" strokeWidth="2" />
+                <line x1="1" y1="4" x2="27" y2="4" stroke="#667085" strokeWidth="2" />
               </svg>
               实线：一级、二级层级连接
             </span>
             <span>
               <svg className="legend-stroke" viewBox="0 0 28 8" aria-hidden="true">
-                <line x1="1" y1="4" x2="27" y2="4" stroke="#d5e6f2" strokeWidth="2" strokeDasharray="5 3" />
+                <line x1="1" y1="4" x2="27" y2="4" stroke="#667085" strokeWidth="2" strokeDasharray="5 3" />
               </svg>
               虚线：三级及以下层级连接
             </span>
             <span>
               <svg className="legend-stroke" viewBox="0 0 28 8" aria-hidden="true">
-                <line x1="1" y1="4" x2="27" y2="4" stroke="#d5e6f2" strokeWidth="2" strokeDasharray="2 2" />
+                <line x1="1" y1="4" x2="27" y2="4" stroke="#667085" strokeWidth="2" strokeDasharray="2 2" />
               </svg>
               点线：非层级关联
             </span>

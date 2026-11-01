@@ -193,8 +193,8 @@ function plusBadge() {
     placement: "right-top" as const,
     fontSize: 12,
     fontWeight: 700,
-    fill: "#101820",
-    backgroundFill: "#f4fbff",
+    fill: "#17212f",
+    backgroundFill: "#ffffff",
     backgroundRadius: 8,
     padding: [0, 4] as [number, number],
     offsetX: -1,
@@ -294,7 +294,7 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, GraphCanvasProps>(funct
       autoResize: true,
       padding: 28,
       animation: false,
-      background: "#101820",
+      background: "#f7f8fa",
       zoomRange: [0.35, 2.6],
       data: {
         nodes: currentNodes.map((node) => {
@@ -332,12 +332,12 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, GraphCanvasProps>(funct
             size,
             fill: typeof data?.categoryColor === "string" ? data.categoryColor : "#8ea0b3",
             fillOpacity: 1,
-            stroke: hub ? "#ffffff" : "rgba(244, 250, 255, 0.78)",
+            stroke: hub ? "#ffffff" : "#e5e8ed",
             lineWidth: hub ? 2.5 : 1.2,
             lineDash: data?.uiGroup === true && !hub ? [4, 3] : [],
             cursor: "pointer" as const,
             labelText: headline ? shortLabel(data, datum.id) : "",
-            labelFill: "#f7fbff",
+            labelFill: "#17212f",
             labelFontSize: hub ? 16 : size <= 20 ? 13 : 15,
             labelFontWeight: hub ? 700 : 600,
             labelPlacement: minorLabelPlacement(data),
@@ -345,7 +345,7 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, GraphCanvasProps>(funct
             labelOffsetY: 8,
             labelWordWrap: false,
             labelBackground: true,
-            labelBackgroundFill: "rgba(10, 16, 22, 0.9)",
+            labelBackgroundFill: "rgba(255, 255, 255, 0.94)",
             labelBackgroundRadius: 4,
             labelPadding: [2, 6] as [number, number],
             badge: hidden > 0,
@@ -355,26 +355,26 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, GraphCanvasProps>(funct
         state: {
           selected: {
             lineWidth: 3,
-            stroke: "#ffffff",
+            stroke: "#2563eb",
             fillOpacity: 1,
-            labelFill: "#f7fbff",
+            labelFill: "#17212f",
             labelFillOpacity: 1,
             halo: true,
-            haloStroke: "rgba(255, 255, 255, 0.85)",
+            haloStroke: "rgba(37, 99, 235, 0.28)",
             haloLineWidth: 8,
           },
           active: {
             lineWidth: 2.4,
-            stroke: "#ffffff",
+            stroke: "#2563eb",
             fillOpacity: 1,
-            labelFill: "#f7fbff",
+            labelFill: "#17212f",
             labelFillOpacity: 1,
           },
           dim: {
             fillOpacity: 0.92,
             strokeOpacity: 0.9,
             opacity: 1,
-            labelFill: "#f7fbff",
+            labelFill: "#17212f",
             labelFillOpacity: 1,
             labelOpacity: 1,
             badgeBackgroundOpacity: 1,
@@ -389,7 +389,7 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, GraphCanvasProps>(funct
           const kind = readLineKind(datum.data?.lineKind)
           const hiddenAssociation = kind === "association" && cross
           return {
-            stroke: "rgba(186, 210, 226, 0.9)",
+            stroke: "#8b9aab",
             strokeOpacity: hiddenAssociation ? 0 : kind === "association" ? 0.45 : 0.9,
             lineWidth: kind === "dashed" ? 1.15 : 1.05,
             lineDash: lineDashOf(kind),
@@ -401,7 +401,7 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, GraphCanvasProps>(funct
         },
         state: {
           active: (datum: { data?: Record<string, unknown> }) => ({
-            stroke: "#f4fbff",
+            stroke: "#2563eb",
             strokeOpacity: 1,
             lineWidth: 1.8,
             labelText: "",
@@ -421,8 +421,10 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, GraphCanvasProps>(funct
           enable: (event: IElementEvent) => event.targetType === "node",
           style: {
             ".tooltip": {
-              background: "#1a2430",
-              color: "#f7fbff",
+              background: "#ffffff",
+              color: "#17212f",
+              border: "1px solid #e5e8ed",
+              boxShadow: "0 8px 24px rgba(23, 33, 47, 0.08)",
             },
           },
           getContent: (_event: IElementEvent, items: Array<{ data?: Record<string, unknown> }>) => {
@@ -431,10 +433,10 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, GraphCanvasProps>(funct
             const labels = hiddenNames(data)
             const level = typeof data?.expandLevel === "number" ? data.expandLevel : 0
             if (labels.length === 0 || level < 1) {
-              return `<div style="max-width:280px;color:#f7fbff;line-height:1.5">${name}</div>`
+              return `<div style="max-width:280px;color:#17212f;line-height:1.5">${name}</div>`
             }
             const preview = labels.slice(0, 3).map((item) => escapeHtml(item)).join("、")
-            return `<div style="max-width:300px;color:#f7fbff;line-height:1.5"><div>${name}</div><div style="margin-top:4px;color:#d7e8f6">双击展开第${level}级 · ${labels.length}个节点</div><div style="margin-top:2px">${preview}</div></div>`
+            return `<div style="max-width:300px;color:#17212f;line-height:1.5"><div>${name}</div><div style="margin-top:4px;color:#667085">双击展开第${level}级 · ${labels.length}个节点</div><div style="margin-top:2px">${preview}</div></div>`
           },
         },
       ],

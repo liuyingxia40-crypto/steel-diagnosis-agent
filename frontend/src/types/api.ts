@@ -24,27 +24,6 @@ export interface ChatResponse {
   sources: KnowledgeSource[]
 }
 
-export interface VibrationPeak {
-  frequency_hz: number
-  amplitude: number
-}
-
-export interface VibrationSpectrum {
-  window: string
-  dc_removed: boolean
-  fft_length: number | null
-  frequency_resolution_hz: number | null
-  peaks: VibrationPeak[]
-  amplitude_note: string
-}
-
-export interface VibrationConclusions {
-  faults: unknown[]
-  alarms: unknown[]
-  probabilities: unknown[]
-  note: string
-}
-
 export interface DatasetSheet {
   sheet_name: string
   equipment_category: string
@@ -256,28 +235,4 @@ export interface MonitoringEventList {
   count: number
   limit: number
   events: StoredMonitorEvent[]
-}
-
-export interface VibrationAnalysisResponse {
-  ok: true
-  error: null
-  unit: string
-  unit_note: string
-  sample_count: number
-  sampling_rate_hz: number
-  duration_seconds: number
-  mean: number
-  rms: number
-  peak_absolute: number
-  peak_to_peak: number
-  crest_factor: number | null
-  kurtosis_pearson: number | null
-  kurtosis_type: string
-  kurtosis_note: string
-  fft: VibrationSpectrum
-  notes: string[]
-  conclusions: VibrationConclusions
-  data_source: string
-  column: string
-  analysis_note: string
 }

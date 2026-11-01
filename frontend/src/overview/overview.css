@@ -1,0 +1,1027 @@
+.overview {
+  --ov-bg: #f7f8fa;
+  --ov-card: #ffffff;
+  --ov-text: #17212f;
+  --ov-muted: #667085;
+  --ov-line: #e5e8ed;
+  --ov-blue: #2563eb;
+  --ov-ok: #208568;
+  --ov-warn: #d49a36;
+  --ov-alarm: #d85a56;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding: 16px 20px 12px;
+  background: var(--ov-bg);
+  color: var(--ov-text);
+  font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.overview h1,
+.overview h2,
+.overview h3,
+.overview p {
+  color: inherit;
+}
+
+.overview h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.overview h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.overview h3 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--ov-muted);
+}
+
+.ov-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.ov-header,
+.ov-physical-bar,
+.ov-scada-meta,
+.ov-trend-bar,
+.ov-ranges,
+.ov-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ov-header {
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.ov-header p,
+.ov-scada-note,
+.ov-scada-head p,
+.ov-status-bar,
+.ov-chain-note {
+  margin: 4px 0 0;
+  color: var(--ov-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.ov-focus,
+.ov-ranges,
+.ov-trend-bar div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ov-focus button,
+.ov-trend-bar button,
+.ov-ranges button {
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--ov-line);
+  border-radius: 8px;
+  background: var(--ov-card);
+  color: var(--ov-text);
+  font: inherit;
+  font-size: 12px;
+}
+
+.ov-focus button:hover,
+.ov-trend-bar button:hover,
+.ov-ranges button:hover,
+.ov-alarm-card:hover {
+  border-color: #c5ced8;
+}
+
+.ov-focus button[aria-selected="true"],
+.ov-trend-bar button[aria-pressed="true"],
+.ov-ranges button[aria-pressed="true"] {
+  border-color: var(--ov-blue);
+  color: var(--ov-blue);
+  background: #eff4ff;
+}
+
+.ov-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.9fr);
+  gap: 12px;
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+}
+
+.ov-physical,
+.ov-scada {
+  border: 1px solid var(--ov-line);
+  border-radius: 12px;
+  background: var(--ov-card);
+}
+
+.ov-physical {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  padding: 12px 12px 8px;
+}
+
+.ov-physical.is-workspace {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.ov-physical-bar {
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-bottom: 8px;
+}
+
+.ov-physical-caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 6px;
+}
+
+.ov-physical-caption h2 {
+  color: var(--ov-muted);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.ov-chain-tools {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.ov-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ov-muted);
+  font-size: 12px;
+}
+
+.ov-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ov-swatch {
+  width: 16px;
+  height: 3px;
+  border-radius: 999px;
+  background: #3c4a5a;
+}
+
+.ov-swatch-water {
+  background: #2f6f86;
+}
+
+.ov-swatch-oil {
+  background: #7a6248;
+}
+
+.ov-swatch-return {
+  background: repeating-linear-gradient(90deg, #8aa0ab 0 4px, transparent 4px 7px);
+}
+
+.ov-chain-scroll {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+}
+
+.ov-physical.is-workspace .ov-chain-scroll {
+  overflow: hidden;
+}
+
+.ov-physical.is-workspace .ov-chain {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+}
+
+.ov-chain {
+  display: block;
+  width: 100%;
+  min-width: 680px;
+  height: auto;
+  font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.ov-chain-note {
+  fill: var(--ov-muted);
+  font-size: 11px;
+}
+
+.ov-pipe {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ov-equip {
+  cursor: pointer;
+}
+
+.ov-equip-body,
+.ov-equip-line {
+  fill: #ffffff;
+  stroke: currentColor;
+  stroke-width: 1.4;
+}
+
+.ov-equip-line {
+  fill: none;
+}
+
+.ov-face-front,
+.ov-metal {
+  fill: #fbfcfd;
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+
+.ov-face-top {
+  fill: #eef2f6;
+  stroke: currentColor;
+  stroke-width: 1.05;
+}
+
+.ov-face-side {
+  fill: #e4e9ee;
+  stroke: currentColor;
+  stroke-width: 1.05;
+}
+
+.ov-system-coolant .ov-face-front,
+.ov-system-coolant .ov-metal {
+  fill: #f7fbfc;
+}
+
+.ov-system-coolant .ov-face-top {
+  fill: #e6f1f4;
+}
+
+.ov-system-coolant .ov-face-side {
+  fill: #d5e4ea;
+}
+
+.ov-system-lube .ov-face-front,
+.ov-system-lube .ov-metal {
+  fill: #fbfaf7;
+}
+
+.ov-system-lube .ov-face-top {
+  fill: #f3eee6;
+}
+
+.ov-system-lube .ov-face-side {
+  fill: #e7dfd2;
+}
+
+.ov-detail {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ov-cut-bg {
+  fill: #e8edf2;
+  stroke: none;
+}
+
+.ov-water-fill {
+  fill: #d5e6ec;
+  stroke: none;
+}
+
+.ov-oil-fill {
+  fill: #ead9bc;
+  stroke: none;
+}
+
+.ov-hit {
+  fill: transparent;
+}
+
+.ov-select-ring {
+  fill: rgba(37, 99, 235, 0.04);
+  stroke: var(--ov-blue);
+  stroke-width: 1.4;
+}
+
+.ov-focus-ring {
+  fill: transparent;
+  stroke-width: 2;
+  pointer-events: none;
+}
+
+.ov-system-drive .ov-focus-ring {
+  fill: rgba(60, 74, 90, 0.08);
+  stroke: #3c4a5a;
+}
+
+.ov-system-coolant .ov-focus-ring {
+  fill: rgba(47, 111, 134, 0.1);
+  stroke: #2f6f86;
+}
+
+.ov-system-lube .ov-focus-ring {
+  fill: rgba(122, 98, 72, 0.1);
+  stroke: #7a6248;
+}
+
+.ov-chain[data-focus="drive"] .ov-equip:not([data-system="drive"]),
+.ov-chain[data-focus="coolant"] .ov-equip:not([data-system="coolant"]),
+.ov-chain[data-focus="lube"] .ov-equip:not([data-system="lube"]) {
+  opacity: 0.34;
+}
+
+.ov-pipe-body,
+.ov-flow,
+.ov-particle,
+.ov-path-label {
+  pointer-events: none;
+}
+
+.ov-pipe-body {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ov-pipe-water {
+  stroke: #d3e3ea;
+  stroke-width: 8;
+}
+
+.ov-pipe-return {
+  stroke: #c5d5dc;
+  stroke-width: 6;
+  stroke-dasharray: 7 6;
+}
+
+.ov-pipe-oil {
+  stroke: #efe2d0;
+  stroke-width: 7;
+}
+
+.ov-pipe-oilback {
+  stroke: #e4d2b8;
+  stroke-width: 5;
+  stroke-dasharray: 6 6;
+}
+
+.ov-pipe-power {
+  stroke: #d8dee6;
+  stroke-width: 5;
+}
+
+.ov-flow {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.ov-flow-water {
+  stroke: #2f6f86;
+}
+
+.ov-flow-oil {
+  stroke: #7a6248;
+}
+
+.ov-flow-power {
+  stroke: #3c4a5a;
+}
+
+.ov-flow-jet {
+  stroke: #6d98a8;
+  stroke-width: 1.2;
+}
+
+.ov-flow-group.is-quiet .ov-flow {
+  opacity: 0.34;
+}
+
+.ov-flow-group.is-hot .ov-flow {
+  opacity: 1;
+  stroke-width: 2.4;
+}
+
+.ov-particle {
+  opacity: 0;
+}
+
+.ov-particle-coolant {
+  fill: #2f6f86;
+}
+
+.ov-particle-lube {
+  fill: #7a6248;
+}
+
+.ov-path-label {
+  fill: var(--ov-muted);
+  font-size: 11px;
+}
+
+.ov-equip-name,
+.ov-equip-code {
+  fill: var(--ov-text);
+  font-size: 11px;
+  font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.ov-equip-code {
+  fill: var(--ov-muted);
+  font-size: 10px;
+}
+
+.ov-equip.is-selected .ov-face-front,
+.ov-equip.is-selected .ov-metal,
+.ov-equip:focus-visible .ov-face-front {
+  stroke: var(--ov-blue);
+}
+
+.ov-equip.is-locating .ov-face-front,
+.ov-equip.is-locating .ov-metal {
+  animation: ov-locate 0.7s ease 2;
+}
+
+@keyframes ov-locate {
+  0%,
+  100% {
+    stroke: currentColor;
+  }
+
+  40% {
+    stroke: var(--ov-warn);
+    stroke-width: 2px;
+  }
+}
+
+.ov-warn-dot {
+  fill: var(--ov-warn);
+  stroke: #ffffff;
+  stroke-width: 1;
+}
+
+.ov-health-label,
+.ov-infer-label,
+.ov-link-ring,
+.ov-infer-ring {
+  pointer-events: none;
+}
+
+.ov-equip.is-attention .ov-glyph {
+  animation: ov-flash-attention 1.2s ease-in-out infinite;
+}
+
+.ov-equip.is-warning .ov-glyph,
+.ov-equip.is-critical .ov-glyph {
+  animation: ov-flash-alarm 1.2s ease-in-out infinite;
+}
+
+.ov-equip.is-attention .ov-glyph :is(.ov-face-front, .ov-metal, .ov-face-top, .ov-face-side, .ov-detail, .ov-equip-body, .ov-equip-line) {
+  animation: ov-stroke-attention 1.2s ease-in-out infinite;
+}
+
+.ov-equip.is-warning .ov-glyph :is(.ov-face-front, .ov-metal, .ov-face-top, .ov-face-side, .ov-detail, .ov-equip-body, .ov-equip-line),
+.ov-equip.is-critical .ov-glyph :is(.ov-face-front, .ov-metal, .ov-face-top, .ov-face-side, .ov-detail, .ov-equip-body, .ov-equip-line) {
+  animation: ov-stroke-alarm 1.2s ease-in-out infinite;
+}
+
+@keyframes ov-stroke-attention {
+  0%,
+  100% {
+    stroke: currentColor;
+  }
+
+  50% {
+    stroke: var(--ov-warn);
+  }
+}
+
+@keyframes ov-stroke-alarm {
+  0%,
+  100% {
+    stroke: currentColor;
+  }
+
+  50% {
+    stroke: var(--ov-alarm);
+  }
+}
+
+@keyframes ov-flash-attention {
+  0%,
+  100% {
+    filter: none;
+  }
+
+  50% {
+    filter: drop-shadow(0 0 1px var(--ov-warn)) drop-shadow(0 0 4px var(--ov-warn));
+  }
+}
+
+@keyframes ov-flash-alarm {
+  0%,
+  100% {
+    filter: none;
+  }
+
+  50% {
+    filter: drop-shadow(0 0 1px var(--ov-alarm)) drop-shadow(0 0 4px var(--ov-alarm));
+  }
+}
+
+.ov-health-label {
+  font-size: 10px;
+  font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.ov-health-label.is-healthy {
+  fill: var(--ov-ok);
+}
+
+.ov-health-label.is-attention {
+  fill: #9a7340;
+}
+
+.ov-health-label.is-warning,
+.ov-health-label.is-critical {
+  fill: var(--ov-alarm);
+}
+
+.ov-health-label.is-unknown {
+  fill: #98a2b3;
+}
+
+.ov-link-ring {
+  fill: transparent;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  opacity: 0.7;
+}
+
+.ov-infer-ring {
+  fill: rgba(212, 154, 54, 0.06);
+  stroke: var(--ov-warn);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+}
+
+.ov-infer-label {
+  fill: #9a7340;
+  font-size: 10px;
+  font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.ov-chain.is-health .ov-flow {
+  opacity: 0.42;
+}
+
+.ov-chain.is-health .ov-flow-group.is-hot .ov-flow {
+  opacity: 0.9;
+}
+
+.ov-chain.is-health .ov-equip.is-selected .ov-face-front,
+.ov-chain.is-health .ov-equip.is-selected .ov-metal,
+.ov-chain.is-replay .ov-equip.is-selected .ov-face-front,
+.ov-chain.is-replay .ov-equip.is-selected .ov-metal {
+  stroke: var(--ov-blue);
+}
+
+.ov-system-nav {
+  display: flex;
+  flex: 1 0 auto;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.ov-system-nav button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--ov-line);
+  border-radius: 8px;
+  background: #fbfcfd;
+  color: var(--ov-text);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.ov-system-nav button strong {
+  font-weight: 650;
+}
+
+.ov-system-nav button strong.is-healthy {
+  color: var(--ov-ok);
+}
+
+.ov-system-nav button strong.is-attention {
+  color: #c48a2a;
+}
+
+.ov-system-nav button strong.is-warning,
+.ov-system-nav button strong.is-critical {
+  color: var(--ov-alarm);
+}
+
+.ov-system-nav button strong.is-unknown {
+  color: #98a2b3;
+}
+
+.ov-system-nav button[aria-pressed="true"] {
+  border-color: #d5dde6;
+  background: #f4f6f8;
+}
+
+.ov-status-dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 99px;
+  background: #98a2b3;
+}
+
+.ov-status-dot.is-healthy {
+  background: var(--ov-ok);
+}
+
+.ov-status-dot.is-attention {
+  background: var(--ov-warn);
+}
+
+.ov-status-dot.is-warning,
+.ov-status-dot.is-critical {
+  background: var(--ov-alarm);
+}
+
+.ov-scada {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.ov-scada.is-detail {
+  gap: 12px;
+  padding: 12px 14px 14px;
+  overflow: auto;
+}
+
+.ov-run-panel,
+.ov-diag-panel {
+  min-height: 0;
+  overflow: auto;
+}
+
+.ov-run-panel {
+  flex: 1 1 40%;
+  padding: 12px 14px 10px;
+}
+
+.ov-diag-panel {
+  flex: 1.5 1 60%;
+  padding: 10px 14px 12px;
+  border-top: 1px solid var(--ov-line);
+}
+
+.ov-diag-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.ov-panel-head,
+.ov-diag-tools {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ov-diag-tools {
+  color: var(--ov-muted);
+  font-size: 12px;
+}
+
+.ov-diag-tools button,
+.ov-back,
+.ov-text-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ov-blue);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ov-text-link {
+  align-self: flex-start;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.ov-diag-tools button:disabled {
+  color: var(--ov-muted);
+  cursor: default;
+}
+
+.ov-back {
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.ov-run-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-top: 4px;
+  color: var(--ov-muted);
+  font-size: 12px;
+}
+
+.ov-scada-head h2 {
+  margin-top: 0;
+}
+
+.ov-run-panel h3,
+.ov-diag-panel h3,
+.ov-diag-stack h3,
+.ov-scada.is-detail h3 {
+  margin: 12px 0 0;
+}
+
+.ov-spec {
+  display: grid;
+  margin: 0;
+}
+
+.ov-spec div {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--ov-line);
+  font-size: 13px;
+}
+
+.ov-spec dt {
+  color: var(--ov-muted);
+}
+
+.ov-spec dd {
+  margin: 0;
+}
+
+.ov-scada-meta {
+  flex-wrap: wrap;
+  margin-top: 6px;
+  color: var(--ov-muted);
+  font-size: 12px;
+}
+
+.ov-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 12px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ov-kpis li {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.ov-kpis span,
+.ov-kpis em,
+.ov-alarm-card em {
+  color: var(--ov-muted);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.ov-kpis strong {
+  color: var(--ov-text);
+  font-size: 22px;
+  font-weight: 650;
+  line-height: 1.1;
+}
+
+.ov-kpis small {
+  margin-left: 3px;
+  color: var(--ov-muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.ov-ok {
+  color: var(--ov-ok);
+}
+
+.ov-warn {
+  color: var(--ov-warn);
+}
+
+.ov-summary {
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.ov-summary p {
+  margin: 0;
+  color: var(--ov-text);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.ov-alarm-list {
+  display: grid;
+  gap: 6px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ov-alarm-card {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--ov-line);
+  border-radius: 8px;
+  background: #fbfcfd;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ov-alarm-card strong {
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.ov-alarm-card .is-warn,
+.ov-alarm-card .is-infer {
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.ov-alarm-card .is-warn {
+  color: var(--ov-alarm);
+}
+
+.ov-alarm-card .is-infer {
+  color: #3d4c63;
+}
+
+.ov-trend-bar {
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.ov-trend-bar h3,
+.ov-ranges {
+  margin-bottom: 8px;
+}
+
+.ov-trend-block {
+  margin-top: 12px;
+}
+
+.ov-trend {
+  display: block;
+  width: 100%;
+  height: 128px;
+}
+
+.ov-trend-grid {
+  stroke: var(--ov-line);
+  stroke-width: 1;
+}
+
+.ov-trend-line {
+  fill: none;
+  stroke: var(--ov-blue);
+  stroke-width: 1.5;
+}
+
+.ov-trend-tick,
+.ov-trend-unit {
+  fill: var(--ov-muted);
+  font-size: 9px;
+  font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.ov-status-bar {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding-top: 4px;
+  color: var(--ov-muted);
+  font-size: 12px;
+}
+
+@media (max-width: 1100px) {
+  .ov-workspace,
+  .ov-header,
+  .ov-physical-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ov-kpis {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ov-equip.is-locating .ov-face-front,
+  .ov-equip.is-locating .ov-metal,
+  .ov-equip.is-attention .ov-glyph,
+  .ov-equip.is-warning .ov-glyph,
+  .ov-equip.is-critical .ov-glyph,
+  .ov-equip.is-attention .ov-glyph :is(.ov-face-front, .ov-metal, .ov-face-top, .ov-face-side, .ov-detail, .ov-equip-body, .ov-equip-line),
+  .ov-equip.is-warning .ov-glyph :is(.ov-face-front, .ov-metal, .ov-face-top, .ov-face-side, .ov-detail, .ov-equip-body, .ov-equip-line),
+  .ov-equip.is-critical .ov-glyph :is(.ov-face-front, .ov-metal, .ov-face-top, .ov-face-side, .ov-detail, .ov-equip-body, .ov-equip-line) {
+    animation: none;
+  }
+
+  .ov-equip.is-locating .ov-face-front,
+  .ov-equip.is-locating .ov-metal,
+  .ov-equip.is-attention .ov-face-front,
+  .ov-equip.is-attention .ov-metal {
+    stroke: var(--ov-warn);
+  }
+
+  .ov-equip.is-warning .ov-face-front,
+  .ov-equip.is-warning .ov-metal,
+  .ov-equip.is-critical .ov-face-front,
+  .ov-equip.is-critical .ov-metal {
+    stroke: var(--ov-alarm);
+  }
+}
+
+@media (max-width: 720px) {
+  .overview {
+    height: auto;
+    min-height: 100%;
+    overflow: visible;
+    padding: 12px;
+  }
+}

@@ -186,7 +186,7 @@ check(
     pageSource.includes("/api/dataset/observations/") &&
     !appSource.includes("智能问答") &&
     appSource.includes("知识图谱") &&
-    appSource.includes("<VibrationAnalysisPage />") &&
+    !appSource.includes("VibrationAnalysisPage") &&
     appSource.includes("设备运行监测") &&
     !pageSource.includes("new Date") &&
     !pageSource.includes("toLocaleString") &&

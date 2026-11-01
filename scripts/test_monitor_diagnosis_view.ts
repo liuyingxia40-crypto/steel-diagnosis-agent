@@ -132,12 +132,14 @@ check(
 )
 check(
   "9 顶部导航保留监测与图谱入口且无智能问答",
-  nav.split('className="nav-button"').length - 1 === 2 &&
+  nav.split('className="nav-button"').length - 1 === 9 &&
+    nav.includes("运行监测") &&
     !nav.includes("智能问答") &&
+    !nav.includes("首页") &&
     nav.includes("知识图谱") &&
     nav.includes("设备运行监测") &&
     !nav.includes("振动数据分析") &&
-    app.includes("<VibrationAnalysisPage />"),
+    !app.includes("VibrationAnalysisPage"),
 )
 check("10 页面文案不把统计偏离写成已确诊故障", !`${page}\n${view}\n${auto}`.includes("已确诊故障") && !page.includes("轴承磨损"))
 check("11 诊断详情分区使用已保存字段", page.includes("诊断线索") && page.includes("知识来源") && page.includes("缺失条件") && page.includes("确诊情况：{NOT_CONFIRMED_TEXT}"))
