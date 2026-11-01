@@ -253,7 +253,7 @@ check(
   "H 原有页面入口和数据查询仍在",
   !appSource.includes("智能问答") &&
     appSource.includes("知识图谱") &&
-    appSource.includes("<VibrationAnalysisPage />") &&
+    !appSource.includes("VibrationAnalysisPage") &&
     appSource.includes("设备运行监测") &&
     pageSource.includes("TrendChart") &&
     summary.status === 200 &&

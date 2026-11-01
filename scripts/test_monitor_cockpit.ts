@@ -129,8 +129,10 @@ check(
     !page.includes("detect_anomaly"),
 )
 check(
-  "10 知识图谱与监测两个主导航仍在且无智能问答入口",
-  nav.split('className="nav-button"').length - 1 === 2 &&
+  "10 知识图谱与监测导航仍在且无智能问答入口",
+  nav.split('className="nav-button"').length - 1 === 9 &&
+    nav.includes("运行监测") &&
+    !nav.includes("首页") &&
     nav.includes("知识图谱") &&
     nav.includes("设备运行监测") &&
     !nav.includes("智能问答") &&

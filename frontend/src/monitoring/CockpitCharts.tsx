@@ -11,7 +11,7 @@ import {
   type VibrationGroupId,
 } from "./view"
 
-const SERIES_COLORS = ["#3dceb6", "#7eb6d6", "#e0c37a", "#d7d3c8"]
+const SERIES_COLORS = ["#2f6f86", "#2563eb", "#d49a36", "#3c4a5a"]
 
 export function CockpitCharts({
   records,
@@ -170,12 +170,12 @@ function CockpitTrend({
           const x = xAt(index)
           return (
             <g key={marker.eventId}>
-              <line x1={x} y1={padTop} x2={x} y2={padTop + innerHeight} stroke="#e0c37a" strokeDasharray="3 3" />
+              <line x1={x} y1={padTop} x2={x} y2={padTop + innerHeight} stroke="#d49a36" strokeDasharray="3 3" />
               <circle
                 cx={x}
                 cy={padTop + 8}
                 r="6"
-                fill="#e0c37a"
+                fill="#d49a36"
                 role="button"
                 tabIndex={0}
                 onClick={() => onMarker(marker.eventId)}
@@ -221,7 +221,7 @@ function CockpitTrend({
         ))}
         {markers.length > 0 && (
           <span>
-            <i style={{ background: "#e0c37a" }} />
+            <i style={{ background: "#d49a36" }} />
             已保存的统计偏离
           </span>
         )}
